@@ -103,3 +103,21 @@ python -m src.train \
 - [Cocoa-Pod-Disease-Detection OSS](https://github.com/Unclefee/Cocoa-Pod-Disease-Detection)
 - [Cocoa image dataset / OSF](https://osf.io/2fw6g)
 
+## 現地写真を想定した5クラスデータの準備
+
+[Cocoa-Pod-Disease-Detection](https://github.com/Unclefee/Cocoa-Pod-Disease-Detection) の公開releaseは、YOLO形式のpod検出ラベルを含むため、まずpod単位にcropして分類用ImageFolderへ変換します。`Health`、`Phytophthora palmivora`、`Moniliophthora roreri`、`Moniliophthora perniciosa`、`Carmenta foraseminis`を、それぞれ `healthy`、`black_pod`、`frosty_pod`、`witches_broom`、`pod_borer` に統合します。
+
+```powershell
+python scripts/prepare_yolo_classification.py `
+  --source data/sources/ghana_five_class/extracted/cocoa_diseases `
+  --dataset ghana_five_class `
+  --mapping configs/label_mapping.json `
+  --output data/processed/ghana_five_class_crops
+
+python scripts/split_crop_manifest.py `
+  --manifest data/processed/ghana_five_class_crops/crop_manifest.csv `
+  --output data/cacao_ghana5_grouped
+```
+
+`split_crop_manifest.py`は同じ元写真のcropがtrain/val/testをまたがないように分割します。複数データセットを統合する場合は、`build_manifest.py`でクラス対応と重複候補を検証してください。
+

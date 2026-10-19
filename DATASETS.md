@@ -42,3 +42,20 @@ python scripts/build_manifest.py `
 ```
 
 The manifest retains both `source_class` and `target_class`, along with image dimensions, source split, and a SHA-256 digest. A missing class mapping or corrupt image fails the command so that silent label mistakes do not enter training.
+
+## YOLOラベル付き5クラスソース
+
+Unclefeeの [Cocoa-Pod-Disease-Detection](https://github.com/Unclefee/Cocoa-Pod-Disease-Detection/releases/tag/v1.0) は、現地撮影を含むpod検出用画像とYOLOラベルを公開しています。分類実験に使う場合は次の順で、検出boxをcropしてから元写真単位で分割します。
+
+```powershell
+python scripts/prepare_yolo_classification.py `
+  --source data/sources/ghana_five_class/extracted/cocoa_diseases `
+  --dataset ghana_five_class `
+  --mapping configs/label_mapping.json `
+  --output data/processed/ghana_five_class_crops
+python scripts/split_crop_manifest.py `
+  --manifest data/processed/ghana_five_class_crops/crop_manifest.csv `
+  --output data/cacao_ghana5_grouped
+```
+
+この変換で `healthy / black_pod / pod_borer / frosty_pod / witches_broom` の5クラスになります。元写真単位で分割することで、同じ写真から作った複数cropによる評価リークを避けます。

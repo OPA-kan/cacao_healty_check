@@ -15,10 +15,18 @@
   },
   "ghana_five_class": {
     "healthy": "healthy",
+    "health": "healthy",
     "carmenta foraseminis": "pod_borer",
     "moniliophthora perniciosa": "witches_broom",
     "moniliophthora roreri": "frosty_pod",
     "phytophthora palmivora": "black_pod"
+  },
+  "ghana_five_class_crops": {
+    "healthy": "healthy",
+    "black_pod": "black_pod",
+    "pod_borer": "pod_borer",
+    "frosty_pod": "frosty_pod",
+    "witches_broom": "witches_broom"
   },
   "cocoa_monilia": {
     "h0": "healthy",
