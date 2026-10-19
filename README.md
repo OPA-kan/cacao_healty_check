@@ -10,7 +10,18 @@
 
 対象はまず `healthy / black_pod / other` の3クラスを想定しています。`ImageFolder`形式ならクラスを増やして多クラス分類にも使えます。
 
-## データ配置
+## データ取得と配置
+
+GitHubには生画像を含めず、Kaggleから取得してローカルで展開します。Kaggleの公開データセットはHealthy、Black Pod Rot、Pod Borerの3クラスで、複数の研究で利用されています。
+
+まずKaggle CLIを認証済みにしてください。`kaggle.json`はリポジトリへ絶対に追加しないでください。
+
+```powershell
+.\scripts\download_kaggle.ps1
+python scripts/split_imagefolder.py --source data/raw --output data/cacao
+```
+
+Kaggle側のデータセット名や公開状態が変わった場合は、スクリプトの候補slugを更新してください。
 
 学習用データはGitHubにアップロードせず、次の形式でローカルに配置してください。
 
@@ -30,7 +41,7 @@ data/cacao/
     └── other/
 ```
 
-クラス名はフォルダ名から自動取得されます。データセットに含まれる画像・重み・結果は `.gitignore` で除外しています。
+クラス名はフォルダ名から自動取得されます。データセットに含まれる画像・重み・結果は `.gitignore` で除外しています。画像データ自体の再配布条件は、取得元のKaggleページを確認してください。
 
 ## セットアップ
 
