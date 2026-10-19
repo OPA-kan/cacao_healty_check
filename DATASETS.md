@@ -28,3 +28,17 @@ data/cacao/{train,val,test}/{black_pod,healthy,other}/...
 ```
 
 Class names are normalized by the splitter. Inspect the generated class counts before training, and confirm that the dataset license and intended use are appropriate for your project.
+
+## Dataset integration
+
+Use `configs/label_mapping.json` and `scripts/build_manifest.py` to normalize multiple labeled sources without relabeling each image manually:
+
+```powershell
+python scripts/build_manifest.py `
+  --dataset cacao_images_zenodo=data/zenodo/extracted/ChrisRosales-CacaoImages-843a58a `
+  --dataset davao=data/raw/davao `
+  --mapping configs/label_mapping.json `
+  --output data/manifest.csv
+```
+
+The manifest retains both `source_class` and `target_class`, along with image dimensions, source split, and a SHA-256 digest. A missing class mapping or corrupt image fails the command so that silent label mistakes do not enter training.

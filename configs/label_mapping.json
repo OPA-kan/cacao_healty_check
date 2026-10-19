@@ -1,0 +1,29 @@
+{
+  "cacao_images_zenodo": {
+    "imagenes_32x32_enfermas": "other_disease",
+    "imagenes_32x32_sanas": "healthy"
+  },
+  "cocoa_disease_gh": {
+    "healthy": "healthy",
+    "phyto": "black_pod",
+    "moni": "frosty_pod"
+  },
+  "davao": {
+    "healthy": "healthy",
+    "black pod rot": "black_pod",
+    "pod borer": "pod_borer"
+  },
+  "ghana_five_class": {
+    "healthy": "healthy",
+    "carmenta foraseminis": "pod_borer",
+    "moniliophthora perniciosa": "witches_broom",
+    "moniliophthora roreri": "frosty_pod",
+    "phytophthora palmivora": "black_pod"
+  },
+  "cocoa_monilia": {
+    "h0": "healthy",
+    "m1": "frosty_pod",
+    "m2": "frosty_pod",
+    "m3": "frosty_pod"
+  }
+}
